@@ -1,14 +1,37 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 import pdfplumber
 import pandas as pd
 import os
+from pathlib import Path
+import mimetypes
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the PDF to Excel API! Use the /convert endpoint to upload a PDF."}
+
+# Run unit tests to see if file uploaded is really a pdf
+"""def is_pdf(path: str) -> bool:
+
+    if Path(path).suffix.lower() != ".pdf":
+        return False
+    
+    mtype, _ = mimetypes.guess_type(path)
+    if mtype != "application/pdf":
+        return False
+    
+    try:
+        with open(path, "rb") as f:
+            header = f.read(4)
+        if header != b"%PDF":
+            return False
+    except (FileNotFoundError, IOError):
+        return False
+    # Passes all tests
+    return True """
+
 
 @app.post("/convert")
 async def convert_pdf_to_excel(file: UploadFile = File(...)):
