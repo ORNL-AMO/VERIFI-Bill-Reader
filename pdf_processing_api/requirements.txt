@@ -4,3 +4,6 @@ pandas==2.2.3
 uvicorn==0.32.0
 python-multipart==0.0.17
 openpyxl==3.1.5
+torch
+marker-pdf
+
