@@ -8,12 +8,7 @@ import mimetypes
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the PDF to Excel API! Use the /convert endpoint to upload a PDF."}
-
-# Run unit tests to see if file uploaded is really a pdf
-"""def is_pdf(path: str) -> bool:
+def is_pdf(path: str) -> bool: #helper function to determine if file chosen is a pdf for security/data integrity purposes
 
     if Path(path).suffix.lower() != ".pdf":
         return False
@@ -30,8 +25,11 @@ def read_root():
     except (FileNotFoundError, IOError):
         return False
     # Passes all tests
-    return True """
+    return True
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the PDF to Excel API! Use the /convert endpoint to upload a PDF."}
 
 @app.post("/convert")
 async def convert_pdf_to_excel(file: UploadFile = File(...)):
@@ -41,6 +39,10 @@ async def convert_pdf_to_excel(file: UploadFile = File(...)):
     
     with open(pdf_path, "wb") as f:
         f.write(await file.read())
+
+    if not is_pdf(pdf_path):
+        os.remove(pdf_path)
+        raise HTTPException(status_code=400, detail="Error: File Uploaded not a pdf")
     
     # Extract data from the PDF
     extracted_data = []
