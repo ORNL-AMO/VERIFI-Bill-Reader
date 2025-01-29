@@ -36,7 +36,12 @@ export class AppComponent {
     this.errorMessage = ''; //Clears any previous errors
     const allowedTypes = ['application/pdf', 'application/x-pdf'];
     // Validate the file type before sending the request
-    if (!this.file || !allowedTypes.includes(this.file.type))  {
+    if(!this.file) {
+      this.errorMessage = 'No file selected. Please choose a PDF file.';
+      return;
+    }
+    const fileExtension = this.file.name.split('.').pop()?.toLowerCase();
+    if (!allowedTypes.includes(this.file.type) && fileExtension !== 'pdf')  {
       this.errorMessage = 'Error uploading file. Please upload a valid PDF file.';
       return;
     }
@@ -48,13 +53,26 @@ export class AppComponent {
     //formData.set("file",this.file)
 
     //Submit to API
-    this.http.post<any>('http://127.0.0.1:8000/convert', formData).subscribe({
+    this.http.post('http://127.0.0.1:8000/convert', formData, { responseType: 'blob'}).subscribe({
     next: (response: any) => {
-      console.log('File uploaded successfully', response);
-      alert('File uploaded and processed successfully!');
+      if (!response || response.size === 0) {
+        this.errorMessage = "Server returned an empty file. Please try again.";
+        return;
+      }
+      
+      // This portion allows the file to be automatically
+      // downloaded, I am just leaving it commented out
+      // so our computers don't get filled with random excel
+      // files during testing
+
+      // const fileURL = window.URL.createObjectURL(response);
+      // const a = document.createElement('a');
+      // a.href = fileURL;
+      // a.download = `${this.file.name.replace('.pdf', '')}_data.xlsx`;
+      // a.click();
+      // window.URL.revokeObjectURL(fileURL);
     },
     error: (error: any) => {
-      console.error('Error uploading file', error);
       this.errorMessage = error.error?.detail || 'An unexpected error occurred. Please try again.';
     }
   });

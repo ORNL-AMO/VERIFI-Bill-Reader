@@ -1,6 +1,6 @@
 <input type="text" (change)="getName(name.value)" #name /> <br />
 <input type="file" (change)="getFile($event)" /> <br />
-<input type="button"(click)="submitData()" value="Upload PDF" /> 
-<div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+<input type="button" (click)="submitData()" value="Upload PDF" /> 
+<div *ngIf="errorMessage" class="error" style="color: red; margin-top: 10px;">
     {{ errorMessage }}
   </div>
