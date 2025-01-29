@@ -5,8 +5,18 @@ import pandas as pd
 import os
 from pathlib import Path
 import mimetypes
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or specify allowed origins like ["http://localhost:4200"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def is_pdf(path: str) -> bool: #helper function to determine if file chosen is a pdf for security/data integrity purposes
 
@@ -26,6 +36,11 @@ def is_pdf(path: str) -> bool: #helper function to determine if file chosen is a
         return False
     # Passes all tests
     return True
+
+        
+    # except Exception as e:
+    #     print(f"PDF validation error: {str(e)}")
+    #     return False
 
 @app.get("/")
 def read_root():
