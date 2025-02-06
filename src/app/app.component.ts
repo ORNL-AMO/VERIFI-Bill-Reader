@@ -15,7 +15,8 @@ export class AppComponent {
   title = 'pdf-upload';
  
   errorMessage: string = '';  //variable to hold error messages
-
+  successMessage: string = '';
+  
   constructor(
     private http:HttpClient
   ){
@@ -29,36 +30,43 @@ export class AppComponent {
 
   getFile(event:any) {
     this.file = event.target.files[0];
-    console.log('file',this.file);
   }
 
   submitData(){
-    this.errorMessage = ''; //Clears any previous errors
+    console.log('Starting submitData function'); // New log
+    this.errorMessage = ''; 
+    this.successMessage = ''; 
     const allowedTypes = ['application/pdf', 'application/x-pdf'];
-    // Validate the file type before sending the request
+    
     if(!this.file) {
       this.errorMessage = 'No file selected. Please choose a PDF file.';
       return;
     }
+  
     const fileExtension = this.file.name.split('.').pop()?.toLowerCase();
     if (!allowedTypes.includes(this.file.type) && fileExtension !== 'pdf')  {
       this.errorMessage = 'Error uploading file. Please upload a valid PDF file.';
       return;
     }
-
-    //formData object
+  
     let formData = new FormData();
-    //formData.set("name",this.name)
-    formData.append("file",this.file) //send only the file
-    //formData.set("file",this.file)
+  formData.append("file",this.file)
+
 
     //Submit to API
-    this.http.post('http://127.0.0.1:8000/convert', formData, { responseType: 'blob'}).subscribe({
+    this.http.post('http://127.0.0.1:8000/convert', formData, { 
+    responseType: 'blob',
+    observe: 'response'  // Add this to see full response details
+  }).subscribe({
     next: (response: any) => {
-      if (!response || response.size === 0) {
+      
+      if (!response?.body || response.body.size === 0) {
+        console.log('Empty response received'); // New log
         this.errorMessage = "Server returned an empty file. Please try again.";
         return;
       }
+      this.successMessage = `File "${this.file.name}" was successfully uploaded and processed!`;
+      
       
       // This portion allows the file to be automatically
       // downloaded, I am just leaving it commented out
@@ -74,7 +82,7 @@ export class AppComponent {
     },
     error: (error: any) => {
       this.errorMessage = error.error?.detail || 'An unexpected error occurred. Please try again.';
+      this.successMessage = ''; 
     }
   });
-  }
-}
+}}
