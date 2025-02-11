@@ -1,0 +1,26 @@
+--- Address ---
+<think>
+Alright, so I need to extract the address from this Markdown file. Let me start by reading through the content carefully.
+
+First, I see a line that says "Revenue Division PO Box 8003 Davenport, Iowa 52808-8003 (563) 326-7707 www.cityofdavenportiowa.com". That looks like it contains the address. The address is in the middle of a sentence, so I need to make sure I capture that correctly.
+
+I remember the instructions say if the state is mentioned, consider it the United States. Here, "Iowa" is specified, which helps identify the country, but since we're only looking for the address part, I can focus on that line.
+
+Looking closely, the format is "PO Box 8003 Davenport, lowa 52808-8003". Wait, in the first occurrence it's written as "Iowa" with a long 'i', but then again as "lowa" which might be a typo. However, since we're extracting just the address, case sensitivity shouldn't matter.
+
+The full address is: "Revenue Division PO Box 8003 Davenport, Iowa 52808-8003". The other parts like the phone number and website are extra information but not needed for this task. So I'll extract that line as the address.
+</think>
+
+RevenueDivisionPOBox8003Davenport,Iowa52808-8003
+
+--- Zip Code ---
+<think>
+Okay, I need to extract the Zip Code from the given Markdown file. Let me look through the text carefully.
+
+I see a line that says "Revenue Division PO Box 8003 Davenport, Iowa 52808-8003". Here, I notice the numbers following "52808-8003" which are likely a Zip Code. Since it's associated with Iowa, and the state abbreviation is IA, this must be the correct Zip Code.
+
+I also check if there are any other possible Zip Codes in the document but find that all other addresses mention either "Iowa" or specific phone numbers without additional five-digit codes. So, I can confidently identify 52808-8003 as the relevant Zip Code.
+</think>
+
+52808-8003
+
