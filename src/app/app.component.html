@@ -8,8 +8,8 @@
       <label class="btn btn-primary col-12">
         Choose File <input type="file" (change)="getFile($event)" value="Choose file" hidden>
       </label>
-      <small>Only .pdf files accepted   </small>
       <p *ngIf="fileName">{{ fileName }}</p>
+      <small>Only .pdf files accepted   </small>
       <input class="btn btn-primary mt-3 col-12" type="button" (click)="submitData()" value="Upload PDF" /> 
       <div *ngIf="errorMessage" class="error" style="color: red; margin-top: 10px;">
         {{ errorMessage }}
