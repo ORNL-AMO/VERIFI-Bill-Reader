@@ -24,12 +24,14 @@ export class AppComponent {
   }
   name:string = ''
   file:any; 
+  fileName:string = ''
   getName(name:string) {
     this.name = name;
   }
 
   getFile(event:any) {
     this.file = event.target.files[0];
+    this.fileName = event.target.files[0].name;
   }
 
   submitData(){
