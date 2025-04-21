@@ -95,7 +95,7 @@ export class AppComponent {
     // Logic to download the file
     const link = document.createElement('a');
     link.href = 'pdf_processing_api\excel_output'; // location of the excel file
-    link.target = '_blank'; // allows the user to download the file and name it
+    link.download = 'excel_output.xlsx'; // name of the file to be downloaded
     link.click();
   }
 }
