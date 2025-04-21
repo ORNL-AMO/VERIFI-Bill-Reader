@@ -82,6 +82,7 @@ export class AppComponent {
       // a.download = `${this.file.name.replace('.pdf', '')}_data.xlsx`;
       // a.click();
       // window.URL.revokeObjectURL(fileURL);
+      this.isFileAvailable = true; // Set the flag to true
     },
     error: (error: any) => {
       this.errorMessage = error.error?.detail || 'An unexpected error occurred. Please try again.';
@@ -93,8 +94,8 @@ export class AppComponent {
   downloadFile(): void {
     // Logic to download the file
     const link = document.createElement('a');
-    link.href = 'pdf_processing_api\excel_output'; // Replace with the actual file URL
-    link.download = 'excel_output.xlsx'; // Replace with the desired file name
+    link.href = 'pdf_processing_api\excel_output'; // location of the excel file
+    link.target = '_blank'; // allows the user to download the file and name it
     link.click();
   }
 }
