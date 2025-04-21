@@ -16,6 +16,7 @@ export class AppComponent {
  
   errorMessage: string = '';  //variable to hold error messages
   successMessage: string = '';
+  isFileAvailable: boolean = false; // flag to check if file is ready for download
   
   constructor(
     private http:HttpClient
@@ -86,5 +87,14 @@ export class AppComponent {
       this.errorMessage = error.error?.detail || 'An unexpected error occurred. Please try again.';
       this.successMessage = ''; 
     }
-  });
-}}
+    });
+  }
+
+  downloadFile(): void {
+    // Logic to download the file
+    const link = document.createElement('a');
+    link.href = 'pdf_processing_api\excel_output'; // Replace with the actual file URL
+    link.download = 'excel_output.xlsx'; // Replace with the desired file name
+    link.click();
+  }
+}
