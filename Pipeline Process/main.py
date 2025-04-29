@@ -10,10 +10,12 @@ import json
 #############################################################################################################
 #############################################################################################################
 
-## Load user config ##
+# Load user config file
 
 with open('config.json', 'r') as f:
     config = json.load(f)
+
+# Load config variables
 
 USE_MARKER_OCR = config.get("use_marker_ocr", True)
 USE_MARKDOWN = config.get("use_markdown", True)
@@ -25,6 +27,8 @@ MODEL_VERSION = config.get("model_version", "llama3.2-vision:90b")
 DIR = config["directories"]["raw_pdf"]
 OUTPUT_DIR = config["directories"]["output"]
 EXCEL_DIR = config["directories"]["excel_output"]
+
+# Create directories if they do not exist
 
 os.makedirs(DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -52,7 +56,8 @@ num_pdfs, last_filename, pdf_name_base = count_pdf_files()
 
 print(f"Found {num_pdfs} PDF(s) in {DIR}")
 
-# This function makes sure that the output files are not put into folders (for Surya OCR or OCR that places json+markdown in a folder)
+# This function makes sure that the output files are not put into folders 
+# (for Surya OCR or OCR that places each set of json+markdown in a folder)
 def flatten_marker_output(output_dir):
     subdirs = [os.path.join(output_dir, d) for d in os.listdir(output_dir) if os.path.isdir(os.path.join(output_dir, d))]
 
@@ -71,6 +76,9 @@ def flatten_marker_output(output_dir):
 #############################################################################################################
 #############################################################################################################
 #############################################################################################################
+
+# Check if Surya OCR is enabled and run it if necessary
+
 if USE_MARKER_OCR:
     # Run Surya OCR to generate markdown and json
     if num_pdfs >= 1:
@@ -81,6 +89,8 @@ if USE_MARKER_OCR:
 else:
     markdown_content = ""
     json_content = {}
+
+# Check if the user intends to use markdown files and if so, read the content
 
 if USE_MARKDOWN:
     # Process Markdown file
@@ -104,6 +114,8 @@ if USE_MARKDOWN:
         markdown_content = file.read()
 else:
     markdown_content = ""
+
+# Check if the user intends to use json files, and if so, read the content
 
 if USE_JSON:
     # Process JSON file
@@ -223,6 +235,8 @@ def extract_section_data(section_name, fields, markdown_content, json_content, r
     )
     '''
     
+    # Use the running Ollama server to get the AI response to the prompt
+    # The model must be running and available to get a response
     response = ollama.chat(model=MODEL_VERSION, messages=[{"role": "user", "content": prompt}])
      
     # Output the raw AI response to a text file
