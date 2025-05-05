@@ -30,9 +30,23 @@ export class AppComponent {
     this.name = name;
   }
 
-  getFile(event:any) {
-    this.file = event.target.files[0];
-    this.fileName = event.target.files[0].name;
+  triggerFileInput(): void {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click(); // Programmatically open the file explorer
+    }
+  }
+  
+  getFile(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.file = file;
+      this.fileName = file.name; // Display the selected file name
+      this.errorMessage = ''; // Clear any previous error messages
+    } else {
+      this.fileName = '';
+      this.errorMessage = 'No file selected.';
+    }
   }
 
   submitData(){

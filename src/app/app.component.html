@@ -6,19 +6,32 @@
       <h1>VERIFI ML Utility Bill Reader</h1>
       <p class="mt-3">Please select a PDF to extract information from:</p>
       
-      <button type="button" class="btn btn-primary col-6-sm col-4-md col-3-lg" (click)="getFile($event)">
-      Choose File
+      <!-- Hidden file input -->
+      <input 
+        type="file" 
+        id="fileInput" 
+        style="display: none;" 
+        (change)="getFile($event)" 
+        accept=".pdf"
+      />
+
+      <!-- Styled button to trigger file input -->
+      <button 
+        type="button" 
+        class="btn btn-primary col-6-sm col-4-md col-3-lg" 
+        (click)="triggerFileInput()">
+        Choose File
       </button>
       
       <br/>
       <p *ngIf="fileName">{{ fileName }}</p>
-      <small>Only .pdf files accepted   </small>
+      <small>Only .pdf files accepted</small>
       <br/>
       <div class="d-flex justify-content-between align-items-center">
         <button class="btn btn-primary mt-3 col-6-sm col-4-md col-3-lg" type="button" (click)="submitData()">
           Upload PDF
         </button> 
-        <button  class="btn btn-success mt-3 col-6-sm col-4-md col-3-lg text-end" (click)="downloadFile()">
+        <button class="btn btn-success mt-3 col-6-sm col-4-md col-3-lg text-end" (click)="downloadFile()">
           Download Excel
         </button>
       </div>
