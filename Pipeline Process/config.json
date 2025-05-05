@@ -3,7 +3,7 @@
     "use_json": true,
     "use_markdown": true,
     "give_ai_raw_pdf": false,
-    "clean_output_dir": false,
+    "clean_output_dir": true,
     "model_version": "llama3.2-vision:90b",
     "directories": {
       "raw_pdf": "./raw/",
