@@ -1,0 +1,22 @@
+<input style="display:none;" type="text" (change)="getName(name.value)" #name /> <br />
+
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card col-6">
+    <div class="card-body">
+      <h1>VERIFI ML Utility Bill Reader</h1>
+      <p class="mt-3">Please select a PDF to extract information from:</p>
+      <label class="btn btn-primary col-12">
+        Choose File <input type="file" (change)="getFile($event)" value="Choose file" hidden>
+      </label>
+      <p *ngIf="fileName">{{ fileName }}</p>
+      <small>Only .pdf files accepted   </small>
+      <input class="btn btn-primary mt-3 col-12" type="button" (click)="submitData()" value="Upload PDF" /> 
+      <div *ngIf="errorMessage" class="error" style="color: red; margin-top: 10px;">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="success" style="color: green; margin-top: 10px;">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
+</div>

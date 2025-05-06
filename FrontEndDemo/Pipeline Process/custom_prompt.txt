@@ -1,0 +1,27 @@
+Extract all records for {section_name} from the following content.
+Return the results strictly in CSV format. Each row should represent exactly one record, with fields in the order listed below.
+Always return a CSV with one row per record and one column per field.
+If a field value is not found, return BLANK.
+
+Fields: {fields}
+
+You will be given up to three versions of the same content. Use them to validate the data.
+
+## Markdown Content:
+{markdown_content}
+
+## JSON Content:
+{json_content}
+
+## Raw PDF Content:
+{raw_pdf_content}
+
+IMPORTANT:
+- Only return the CSV data.
+- DO NOT return extra text, explanations, or tags.
+- DO NOT repeat the field names or section names.
+- Each line must have exactly {field_count} values.
+- Separate all fields with a single comma.
+- Enclose any field containing a comma in double quotes.
+- Do not add quotes around fields unless necessary.
+- One line per record.

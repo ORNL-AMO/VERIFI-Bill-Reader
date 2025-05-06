@@ -1,0 +1,41 @@
+{
+    "Facilities": [
+        "Facility Name", "Address", "Country", "State", "City", "Zip",
+        "NAICS Code 2 digit", "NAICS Code 3 digit", "Contact Name",
+        "Contact Phone", "Contact Email"
+    ],
+    "Meter-Utilities": [
+        "Facility Name", "Meter Number", "Source", "Scope", "Meter Name (Display)",
+        "Meter Group", "Calendarize Data?", "Phase or Vehicle", "Fuel or Emission",
+        "Collection Unit", "Energy Unit", "Distance Unit", "Estimation Method",
+        "Heat Capacity or Fuel Efficiency", "Include In Energy", "Site To Source",
+        "Agreement Type", "Retain RECS", "Account Number", "Utility Supplier",
+        "Notes", "Building/Location"
+    ],
+    "Electricity": [
+        "Meter Number", "Read Date", "Total Consumption", "Total Real Demand",
+        "Total Billed Demand", "Total Cost", "Non-energy Charge", "Block 1 Consumption",
+        "Block 2 Consumption Charge", "Block 3 Consumption", "Other Consumption",
+        "Other Consumption Charge", "On Peak Amount", "On Peak Charge", "Off Peak Amount",
+        "Off Peak Charge", "Transmission & Delivery Charge", "Power Factor Charge",
+        "Local Sales Tax", "State Sales Tax", "Late Payment", "Other Charge"
+    ],
+    "Stationary Fuel - Other Energy": [
+        "Meter Number", "Read Date", "Total Consumption", "Total Cost",
+        "Higher Heating Value", "Commodity Charge", "Delivery Charge",
+        "Other Charge", "Demand Usage", "Demand Charge", "Local Sales Tax",
+        "State Sales Tax", "Late Payment"
+    ],
+    "Mobile Fuel": [
+        "Meter Number", "Read Date", "Total Consumption or Total Distance",
+        "Fuel Efficiency", "Total Cost", "Other Charge"
+    ],
+    "Water": [
+        "Meter Number", "Read Date", "Total Consumption", "Total Cost",
+        "Commodity Charge", "Delivery Charge", "Other Charge", "Demand Usage",
+        "Demand Charge", "Local Sales Tax", "State Sales Tax", "Late Payment"
+    ],
+    "Other Utility - Emission": [
+        "Meter Number", "Read Date", "Total Consumption", "Total Cost", "Other Charge"
+    ]
+}
