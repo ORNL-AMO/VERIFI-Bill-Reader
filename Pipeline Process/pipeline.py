@@ -247,14 +247,17 @@ def extract_section_data(section_name, fields, markdown_content, json_content, r
         print(f"No data found for section: {section_name}. Creating a blank sheet.")
         return pd.DataFrame(columns=fields)  # Return an empty DataFrame with just column names
 
-  # Parse the CSV-like output from AI
+  # Import the Parser from ai_output_parser.py
     try:
         from ai_output_parser import parse_ai_response
-        return extracted_records
     except ModuleNotFoundError as e:
         print(f"[Import Error] Could not import module: {e}")
         exit(1)
 
+  # Parse the CSV-like output from AI
+    extracted_records = parse_ai_response(cleaned_response, fields)
+    return extracted_records
+    
   # Hardcoded AI Output Parser Below // May need to be modified depending on the model and output
   # Created separate program for easier modification
 '''
