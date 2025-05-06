@@ -1,0 +1,13 @@
+{
+    "use_marker_ocr": true,
+    "use_json": true,
+    "use_markdown": true,
+    "give_ai_raw_pdf": false,
+    "clean_output_dir": true,
+    "model_version": "llama3.2-vision:90b",
+    "directories": {
+      "raw_pdf": "./raw/",
+      "output": "./output/",
+      "excel_output": "./excel_output/"
+    }
+  }
